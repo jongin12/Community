@@ -14,22 +14,20 @@ const SignIn = () => {
   }
   const handleSubmit = (e:any) => {
     e.preventDefault()
-    fetch("http://127.0.0.1:4625/signIn/",{
+    fetch("http://localhost:4625/signIn",{
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      mode: 'cors',
       body: JSON.stringify({
         id: "asdfad",
         pw: "12342",
       }),
     })
-    .then((res)=>res.json())
-    .then((res)=>console.log(res))
+    // .then((res)=>res.json())
+    // .then((res)=>console.log(res))
   }
 
   return (
-    <form onSubmit={handleSubmit} >
+    <div>
       <input
         type="text"
         name='id'
@@ -42,8 +40,8 @@ const SignIn = () => {
         value={values.password}
         onChange={handleChange}
       />
-      <button type="submit">가입</button>
-    </form>      
+      <button type="submit" onClick={handleSubmit}>가입</button>
+    </div>      
   )
 }
 export default SignIn;

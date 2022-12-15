@@ -1,5 +1,6 @@
 const http = require("http");
 const mysql = require("mysql");
+const qs = require("querystring");
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -12,7 +13,7 @@ const connection = mysql.createConnection({
 const server = http.createServer(async (req, res) => {
   const method = req.method;
   const url = req.url;
-  console.log(method);
+  console.log(method + " " + url);
   res.setHeader("Access-Control-Allow-Origin", "*");
   switch (method) {
     case "GET":
@@ -26,29 +27,31 @@ const server = http.createServer(async (req, res) => {
       }
       break;
     case "POST":
-      console.log("object");
       if (url === "/signIn") {
         let body = "";
         req.on("data", (data) => {
+          console.log(data);
           body += data;
         });
         req.on("end", () => {
-          const params = new URLSearchParams(body);
+          let params = new URLSearchParams(body);
           console.log(params);
-          res.writeHead(404, { "Content-Type": "text/html" });
-          res.end("dd");
+          res.writeHead(200, { "Content-Type": "text/json" });
+          res.end();
+          let id = "zxcv";
+          let pw = "9999";
+          // connection.query(
+          //   `INSERT INTO login(user_id,user_pw) VALUES ('${id}','${pw}')`,
+          //   (error, rows, fields) => {
+          //     if (error) throw error;
+          //     let json = JSON.stringify(rows);
+          //     res.writeHead(200, {
+          //       "Content-Type": "text/json; charset=utf-8",
+          //     });
+          //     res.end(json);
+          //   }
+          // );
         });
-        let id = "zxcv";
-        let pw = "9999";
-        // connection.query(
-        //   `INSERT INTO login(user_id,user_pw) VALUES ('${id}','${pw}')`,
-        //   (error, rows, fields) => {
-        //     if (error) throw error;
-        //     let json = JSON.stringify(rows);
-        //     res.writeHead(200, { "Content-Type": "text/json; charset=utf-8" });
-        //     res.end(json);
-        //   }
-        // );
       }
       break;
     default:
