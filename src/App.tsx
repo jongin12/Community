@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import HeaderItem from './Components/HeaderItem';
 import SignIn from './Components/SignIn'
+import Home from './Components/Home'
 
 const Header = styled.div`
   width: 100vw;
@@ -14,14 +15,15 @@ const Main = styled.div`
 `
 
 const App = () => {
-  let sessionStorage = window.sessionStorage
-  console.log(sessionStorage)
+  // let sessionStorage = window.sessionStorage
+  // console.log(sessionStorage)
   return (
     <>
       <Header>
         <HeaderItem />
       </Header>
       <Main>
+        <Home></Home>
         <SignIn></SignIn>
       </Main>
     </>
