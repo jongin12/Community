@@ -78,7 +78,7 @@ const HeaderItem = () => {
         login &&
         <div>
           <button onClick={logout}>로그아웃</button>
-          <p>로그인 중</p>
+          <p>{sessionStorage.id}님, 안녕하세요</p>
         </div>
       }
     </>
