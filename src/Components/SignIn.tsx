@@ -18,17 +18,23 @@ const SignIn = () => {
     let pwCheck =  /^[a-zA-Z0-9]*$/
     if(idCheck.test(values.id) && values.id !== ''){
       if(pwCheck.test(values.pw) && values.pw !== ''){
-        console.log('ok')
-        fetch("http://localhost:4625/signIn",{
-            method: "POST",
-        mode: 'cors',
-        body: JSON.stringify({
-            id: values.id,
-            pw: values.pw,
-          }),
-        })
+        fetch(`http://127.0.0.1:4625/login/${values.id}`)
         .then((res)=>res.json())
-        .then((res)=>console.log(res))
+        .then((res)=>{
+          if(res.length === 0){
+            fetch("http://localhost:4625/signIn",{
+              method: "POST",
+              mode: 'cors',
+              body: JSON.stringify({
+                id: values.id,
+                pw: values.pw,
+              }),
+            })
+            alert('회원가입 성공!')
+          } else {
+            alert('이미 존재하는 ID입니다.')
+          }
+        })
       }else {
         alert('PW는 영어와 숫자만 사용 가능합니다.')
       }
