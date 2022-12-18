@@ -22,19 +22,17 @@ const HeaderItem = () => {
   const handleSubmit = (e:any) => {
     e.preventDefault()
     //새로고침안하게하는 함수
-    fetch('http://127.0.0.1:4625/')
+    fetch(`http://127.0.0.1:4625/login/${values.id}`)
     .then((res)=>res.json())
     .then((res)=>{
       console.log(res)
-      let filter = res.filter((item:any)=>
-        item.user_id === values.id
-      )
-      if(filter.length === 1){
-        if(filter[0].user_pw === values.password){
+      if(res.length === 1){
+        if(res[0].user_pw === values.password){
           // alert(JSON.stringify(values, null, 2))
           sessionStorage.setItem('id',values.id)
           sessionStorage.setItem('login','true')
           setLogin(true)
+          //로그인 성공, 세션에 정보 추가, login 값 true로 변경
         } else {
           alert('비밀번호 오류')
         }

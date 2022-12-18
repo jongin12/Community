@@ -19,13 +19,17 @@ const server = http.createServer(async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   switch (method) {
     case "GET":
-      if (url !== "/favicon.ico") {
-        connection.query("SELECT * from login", (error, rows, fields) => {
-          if (error) throw error;
-          let json = JSON.stringify(rows);
-          res.writeHead(200, { "Content-Type": "text/json; charset=utf-8" });
-          res.end(json);
-        });
+      if (url.startsWith("/login")) {
+        let id = url.split("/")[2];
+        connection.query(
+          `SELECT * from login where user_id = '${id}'`,
+          (error, rows, fields) => {
+            if (error) throw error;
+            let json = JSON.stringify(rows);
+            res.writeHead(200, { "Content-Type": "text/json; charset=utf-8" });
+            res.end(json);
+          }
+        );
       }
       break;
     case "POST":
