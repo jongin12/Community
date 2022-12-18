@@ -18,8 +18,8 @@ const SignIn = () => {
       method: "POST",
       mode: 'cors',
       body: JSON.stringify({
-        id: "asdfad",
-        pw: "12342",
+        id: values.id,
+        pw: values.password,
       }),
     })
     // .then((res)=>res.json())

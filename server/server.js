@@ -4,7 +4,9 @@ const qs = require("querystring");
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "stock5861!",
+  password: "stock586!",
+  //집 : stock586!
+  //학원 : stock5861!
   charset: "utf8",
   database: "test",
   port: 3316,
@@ -30,27 +32,24 @@ const server = http.createServer(async (req, res) => {
       if (url === "/signIn") {
         let body = "";
         req.on("data", (data) => {
-          console.log(data);
           body += data;
         });
         req.on("end", () => {
-          let params = new URLSearchParams(body);
-          console.log(params);
-          res.writeHead(200, { "Content-Type": "text/json" });
-          res.end();
-          let id = "zxcv";
-          let pw = "9999";
-          // connection.query(
-          //   `INSERT INTO login(user_id,user_pw) VALUES ('${id}','${pw}')`,
-          //   (error, rows, fields) => {
-          //     if (error) throw error;
-          //     let json = JSON.stringify(rows);
-          //     res.writeHead(200, {
-          //       "Content-Type": "text/json; charset=utf-8",
-          //     });
-          //     res.end(json);
-          //   }
-          // );
+          console.log(body);
+          let abc = body.split('"');
+          let id = abc[3];
+          let pw = abc[7];
+          connection.query(
+            `INSERT INTO login(user_id,user_pw) VALUES ('${id}','${pw}')`,
+            (error, rows, fields) => {
+              if (error) throw error;
+              let json = JSON.stringify(rows);
+              res.writeHead(200, {
+                "Content-Type": "text/json; charset=utf-8",
+              });
+              res.end(json);
+            }
+          );
         });
       }
       break;
