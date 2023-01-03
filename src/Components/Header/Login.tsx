@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   let sessionStorage = window.sessionStorage
@@ -52,30 +53,33 @@ const Login = () => {
   const test = () => {
     console.log(sessionStorage)
   }
-  
+
   return (
-    <>
+    <div>
       {
         !login &&
-        <form onSubmit={handleSubmit} >
+        <>
+          <form onSubmit={handleSubmit} >
           <input
             type="text"
             name='id'
             value={values.id}
             onChange={handleChange}
             placeholder='ID'
-          />
+            />
           <input
             type="password"
             name='password'
             value={values.password}
             onChange={handleChange}
             placeholder='PW'
-          />
+            />
           <button type="submit">로그인</button>
-        </form>
+          </form>
+          <Link to={'/signIn'}>회원가입</Link>
+          <Link to={'/findPw'}>비밀번호 찾기(준비중)</Link>
+        </>
       }
-      <button onClick={test}>test</button>
       {
         login &&
         <div>
@@ -83,7 +87,8 @@ const Login = () => {
           <p>{sessionStorage.id}님, 안녕하세요</p>
         </div>
       }
-    </>
+      <button onClick={test}>test</button>
+    </div>
   )
 }
 export default Login;

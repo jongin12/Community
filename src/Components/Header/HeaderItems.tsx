@@ -3,18 +3,27 @@ import { useState, useEffect } from 'react';
 import Login from './Login'
 import { Link } from 'react-router-dom';
 
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  & > div:nth-child(1) {
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } 
+`
 
 const HeaderItems = () => {
   return (
-    <>
-      <Link to={'/home'}>
-        <div>홈으로</div>
-      </Link>
+    <Container>
+      <div>
+        <Link to={'/home'}>Main</Link>
+      </div>
       <Login></Login>
-      <Link to={'/signIn'}>
-        <div>회원가입</div>
-      </Link>
-    </>
+    </Container>
   )
 }
 

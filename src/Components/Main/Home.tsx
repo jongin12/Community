@@ -3,13 +3,16 @@ import { useState, useEffect } from 'react';
 
 const Home = () => {
   let sessionStorage = window.sessionStorage
-  console.log(sessionStorage)
 
   const dummy = [
     {name: 'a'},
     {name: 'b'},
     {name: 'c'},
   ]
+
+  useEffect(()=>{
+    console.log(sessionStorage)
+  },[sessionStorage])
 
   return (
     <>

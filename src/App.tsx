@@ -7,12 +7,12 @@ import ErrorPage from './Components/Main/ErrorPage';
 
 const Header = styled.div`
   width: 100vw;
-  height: 10vh;
+  height: 54px;
   border-bottom: 1px solid black;
 `
 const Main = styled.div`
   width: 100vw;
-  height: 90vh;
+  height: 100%;
 `
 
 const App = () => {
