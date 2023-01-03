@@ -41,7 +41,7 @@ const server = http.createServer(async (req, res) => {
         } else {
           let id = url.split("/")[2];
           connection.query(
-            `SELECT * FROM cafe_list WHERE cafe_index = (SELECT cafe_index FROM join_cafe WHERE user_index = (SELECT user_index FROM login WHERE user_id = '${id}'))`,
+            `SELECT * FROM cafe_list WHERE cafe_index = ANY(SELECT cafe_index FROM join_cafe WHERE user_index = ANY(SELECT user_index FROM login WHERE user_id = '${id}'))`,
             (error, rows, fields) => {
               if (error) throw error;
               let json = JSON.stringify(rows);

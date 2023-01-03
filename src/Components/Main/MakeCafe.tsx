@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 const makeCafe = () => {
 
   let sessionStorage = window.sessionStorage
-  console.log(sessionStorage.login);
 
   const [name, setName] = useState("")
 
@@ -31,6 +30,8 @@ const makeCafe = () => {
       .then((res)=>{
         console.log(res)
       })
+    } else {
+      alert('카페명은 영어와 숫자만 사용가능합니다.')
     }
   }
 
