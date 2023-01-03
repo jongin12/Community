@@ -6,6 +6,7 @@ import Home from './Components/Main/Home'
 import ErrorPage from './Components/Main/ErrorPage';
 import FindPw from './Components/Main/FindPw';
 import MakeCafe from './Components/Main/MakeCafe';
+import Cafe from './Components/Cafe/Cafe';
 
 const Header = styled.div`
   width: 100vw;
@@ -32,6 +33,7 @@ const App = () => {
             <Route path='/signIn' element={<SignIn/>}></Route>
             <Route path='/findPw' element={<FindPw/>}></Route>
             <Route path='/makeCafe' element={<MakeCafe/>}></Route>
+            <Route path='/cafe/:name' element={<Cafe/>}></Route>
             <Route path='/*' element={<ErrorPage/>}></Route>
           </Routes>
           {/* <Home></Home> */}

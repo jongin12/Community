@@ -91,7 +91,7 @@ const Login = () => {
           </form>
         </div>
       }
-      <button onClick={test}>test</button>
+      {/* <button onClick={test}>test</button> */}
     </div>
   )
 }

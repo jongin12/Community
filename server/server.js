@@ -114,6 +114,34 @@ const server = http.createServer(async (req, res) => {
             }
           );
         });
+      } else if (url === "/joinCafe") {
+        let body = "";
+        req.on("data", (data) => {
+          body += data;
+        });
+        req.on("end", () => {
+          let abc = body.split('"');
+          let user = abc[3];
+          let cafe = abc[7];
+          // connection.query(
+          //   `INSERT INTO login(user_id,user_pw) VALUES ('${id}','${pw}')`,
+          //   (error, rows, fields) => {
+          //     if (error) throw error;
+          //     let json = JSON.stringify(rows);
+          //     res.writeHead(200, {
+          //       "Content-Type": "text/json; charset=utf-8",
+          //     });
+          //     res.end(json);
+          //   }
+          // );
+          let json = JSON.stringify({
+            test: "dd",
+          });
+          res.writeHead(200, {
+            "Content-Type": "text/json; charset=utf-8",
+          });
+          res.end(json);
+        });
       }
       break;
     default:

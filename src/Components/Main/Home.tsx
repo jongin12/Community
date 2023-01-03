@@ -43,8 +43,8 @@ const Home = () => {
         sessionStorage.login &&
         myCafeList.map((item)=>{
           return (
-            <CafeListBox>
-              <Link to={`/cafe/${item.cafe_name}`} key={item.cafe_index}>
+            <CafeListBox key={item.cafe_index}>
+              <Link to={`/cafe/${item.cafe_name}`}>
                 <p>카페명 : {item.cafe_name}</p>
                 <p>매니저 : {item.cafe_manager}</p>
               </Link>
@@ -56,8 +56,8 @@ const Home = () => {
       {
         cafeList.map((item)=>{
           return (
-            <CafeListBox>
-              <Link to={`/cafe/${item.cafe_name}`} key={item.cafe_index}>
+            <CafeListBox key={item.cafe_index}>
+              <Link to={`/cafe/${item.cafe_name}`}>
                 <p>카페명 : {item.cafe_name}</p>
                 <p>매니저 : {item.cafe_manager}</p>
               </Link>
@@ -65,7 +65,7 @@ const Home = () => {
           )
         })
       }
-      <Link to={'/makeCafe'}>카페만들기</Link>
+      <Link to={'/makeCafe'}>카페 생성</Link>
     </>
   )
 }
