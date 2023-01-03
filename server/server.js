@@ -30,6 +30,13 @@ const server = http.createServer(async (req, res) => {
             res.end(json);
           }
         );
+      } else if (url === "/cafeList") {
+        connection.query(`SELECT * from cafe_list`, (error, rows, fields) => {
+          if (error) throw error;
+          let json = JSON.stringify(rows);
+          res.writeHead(200, { "Content-Type": "text/json; charset=utf-8" });
+          res.end(json);
+        });
       }
       break;
     case "POST":
@@ -55,7 +62,7 @@ const server = http.createServer(async (req, res) => {
             }
           );
         });
-      } else if (url === "makeCafe") {
+      } else if (url === "/makeCafe") {
         let body = "";
         req.on("data", (data) => {
           body += data;
@@ -64,8 +71,9 @@ const server = http.createServer(async (req, res) => {
           console.log(body);
           let abc = body.split('"');
           let name = abc[3];
+          let manager = abc[7];
           connection.query(
-            `INSERT INTO cafe_list(cafe_name) VALUES ('${name}')`,
+            `INSERT INTO cafe_list(cafe_name,cafe_manager) VALUES ('${name}','${manager}')`,
             (error, rows, fields) => {
               if (error) throw error;
               let json = JSON.stringify(rows);
@@ -75,6 +83,12 @@ const server = http.createServer(async (req, res) => {
               res.end(json);
             }
           );
+          // let json = JSON.stringify({
+          //   name: name,
+          //   manager: manager,
+          // });
+          // res.writeHead(200, { "Content-Type": "text/json; charset=utf-8" });
+          // res.end(json);
         });
       }
       break;
