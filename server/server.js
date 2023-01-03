@@ -4,7 +4,7 @@ const qs = require("querystring");
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "stock586!",
+  password: "stock5861!",
   //집 : stock586!
   //학원 : stock5861!
   charset: "utf8",
