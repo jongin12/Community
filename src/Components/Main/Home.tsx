@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   let sessionStorage = window.sessionStorage
@@ -24,6 +25,7 @@ const Home = () => {
           )
         })
       }
+      <Link to={'/makeCafe'}>카페만들기</Link>
     </>
   )
 }

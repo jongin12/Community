@@ -83,8 +83,8 @@ const Login = () => {
       {
         login &&
         <div>
-          <button onClick={logout}>로그아웃</button>
           <p>{sessionStorage.id}님, 안녕하세요</p>
+          <button onClick={logout}>로그아웃</button>
         </div>
       }
       <button onClick={test}>test</button>

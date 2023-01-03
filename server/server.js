@@ -55,6 +55,27 @@ const server = http.createServer(async (req, res) => {
             }
           );
         });
+      } else if (url === "makeCafe") {
+        let body = "";
+        req.on("data", (data) => {
+          body += data;
+        });
+        req.on("end", () => {
+          console.log(body);
+          let abc = body.split('"');
+          let name = abc[3];
+          connection.query(
+            `INSERT INTO cafe_list(cafe_name) VALUES ('${name}')`,
+            (error, rows, fields) => {
+              if (error) throw error;
+              let json = JSON.stringify(rows);
+              res.writeHead(200, {
+                "Content-Type": "text/json; charset=utf-8",
+              });
+              res.end(json);
+            }
+          );
+        });
       }
       break;
     default:

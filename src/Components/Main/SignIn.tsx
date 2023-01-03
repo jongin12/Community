@@ -45,23 +45,26 @@ const SignIn = () => {
   }
 
   return (
-    <div>
-      <input
-        type="text"
-        name='id'
-        value={values.id}
-        onChange={handleChange}
-        placeholder={"ID는 영어와 숫자만 사용가능"}
-      />
-      <input
-        type="pw"
-        name='pw'
-        value={values.pw}
-        onChange={handleChange}
-        placeholder={"PW는 영어와 숫자만 사용가능"}
-      />
-      <button type="submit" onClick={handleSubmit}>가입</button>
-    </div>      
+    <>
+      <h3>회원가입</h3>
+      <div>
+        <input
+          type="text"
+          name='id'
+          value={values.id}
+          onChange={handleChange}
+          placeholder={"ID"}
+        />
+        <input
+          type="pw"
+          name='pw'
+          value={values.pw}
+          onChange={handleChange}
+          placeholder={"PW"}
+          />
+        <button type="submit" onClick={handleSubmit}>가입</button>
+      </div>      
+    </>
   )
 }
 export default SignIn;
