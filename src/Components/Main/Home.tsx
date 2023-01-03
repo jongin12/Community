@@ -21,6 +21,11 @@ const Home = () => {
   const [myCafeList, setMyCafeList] = useState( Array<cafeListInterface> )
 
   useEffect(()=>{
+    fetch(`http://localhost:4625/cafeList/${sessionStorage.id}`)
+    .then((res)=>res.json())
+    .then((res)=>{
+      setMyCafeList(res)
+    })
     fetch('http://localhost:4625/cafeList')
     .then((res)=>res.json())
     .then((res)=>{
@@ -38,9 +43,12 @@ const Home = () => {
         sessionStorage.login &&
         myCafeList.map((item)=>{
           return (
-            <div key={item.cafe_index}>
-              {item.cafe_name}
-            </div>
+            <Link to={`/cafe/${item.cafe_name}`} key={item.cafe_index}>
+              <CafeListBox>
+                <p>카페명 : {item.cafe_name}</p>
+                <p>매니저 : {item.cafe_manager}</p>
+              </CafeListBox>
+            </Link>
           )
         })
       }

@@ -30,13 +30,28 @@ const server = http.createServer(async (req, res) => {
             res.end(json);
           }
         );
-      } else if (url === "/cafeList") {
-        connection.query(`SELECT * from cafe_list`, (error, rows, fields) => {
-          if (error) throw error;
-          let json = JSON.stringify(rows);
-          res.writeHead(200, { "Content-Type": "text/json; charset=utf-8" });
-          res.end(json);
-        });
+      } else if (url.startsWith("/cafeList")) {
+        if (url === "/cafeList") {
+          connection.query(`SELECT * from cafe_list`, (error, rows, fields) => {
+            if (error) throw error;
+            let json = JSON.stringify(rows);
+            res.writeHead(200, { "Content-Type": "text/json; charset=utf-8" });
+            res.end(json);
+          });
+        } else {
+          let id = url.split("/")[2];
+          connection.query(
+            `SELECT * FROM cafe_list WHERE cafe_index = (SELECT cafe_index FROM join_cafe WHERE user_index = (SELECT user_index FROM login WHERE user_id = '${id}'))`,
+            (error, rows, fields) => {
+              if (error) throw error;
+              let json = JSON.stringify(rows);
+              res.writeHead(200, {
+                "Content-Type": "text/json; charset=utf-8",
+              });
+              res.end(json);
+            }
+          );
+        }
       }
       break;
     case "POST":
@@ -83,6 +98,7 @@ const server = http.createServer(async (req, res) => {
               res.end(json);
             }
           );
+          // `INSERT INTO test.join_cafe(user_index,cafe_index,admin) VALUES (7,1,'true')`
           // let json = JSON.stringify({
           //   name: name,
           //   manager: manager,
