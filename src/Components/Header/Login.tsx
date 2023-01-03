@@ -77,7 +77,7 @@ const Login = () => {
           <button type="submit">로그인</button>
           </form>
           <Link to={'/signIn'}>회원가입</Link>
-          <Link to={'/findPw'}>비밀번호 찾기(준비중)</Link>
+          <Link to={'/findPw'}>ID,PW 찾기</Link>
         </>
       }
       {
