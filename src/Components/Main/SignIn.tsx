@@ -47,23 +47,25 @@ const SignIn = () => {
   return (
     <>
       <h3>회원가입</h3>
-      <div>
+      <form onSubmit={handleSubmit} autoComplete="off">
         <input
           type="text"
           name='id'
           value={values.id}
           onChange={handleChange}
           placeholder={"ID"}
+          autoComplete="off"
         />
         <input
-          type="pw"
+          type="password"
           name='pw'
           value={values.pw}
           onChange={handleChange}
           placeholder={"PW"}
-          />
-        <button type="submit" onClick={handleSubmit}>가입</button>
-      </div>      
+          autoComplete="off"
+        />
+        <button type="submit">가입</button>
+      </form>
     </>
   )
 }

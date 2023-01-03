@@ -21,7 +21,6 @@ const Login = () => {
     })
   }
   const handleSubmit = (e:any) => {
-    e.preventDefault()
     //새로고침안하게하는 함수
     fetch(`http://127.0.0.1:4625/login/${values.id}`)
     .then((res)=>res.json())
@@ -35,9 +34,11 @@ const Login = () => {
           setLogin(true)
           //로그인 성공, 세션에 정보 추가, login 값 true로 변경
         } else {
+          e.preventDefault()
           alert('비밀번호 오류')
         }
       } else {
+        e.preventDefault()
         alert('없는 아이디')
       }
     })
@@ -47,6 +48,7 @@ const Login = () => {
     sessionStorage.removeItem('id')
     sessionStorage.removeItem('login')
     setLogin(false)
+    location.reload()
     // alert('로그아웃')
   }
 
@@ -59,7 +61,7 @@ const Login = () => {
       {
         !login &&
         <>
-          <form onSubmit={handleSubmit} >
+        <form onSubmit={handleSubmit} autoComplete="off">
           <input
             type="text"
             name='id'
@@ -75,16 +77,18 @@ const Login = () => {
             placeholder='PW'
             />
           <button type="submit">로그인</button>
-          </form>
-          <Link to={'/signIn'}>회원가입</Link>
-          <Link to={'/findPw'}>ID,PW 찾기</Link>
+        </form>
+        <Link to={'/signIn'}>회원가입</Link>
+        <Link to={'/findPw'}>ID,PW 찾기</Link>
         </>
       }
       {
         login &&
         <div>
           <p>{sessionStorage.id}님, 안녕하세요</p>
-          <button onClick={logout}>로그아웃</button>
+          <form>
+            <button onClick={logout}>로그아웃</button>
+          </form>
         </div>
       }
       <button onClick={test}>test</button>
