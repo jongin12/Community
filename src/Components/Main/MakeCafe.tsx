@@ -29,6 +29,11 @@ const makeCafe = () => {
       .then((res)=>res.json())
       .then((res)=>{
         console.log(res)
+        if(res.error){
+          alert(res.error)
+        }else{
+          alert('카페 생성 완료')
+        }
       })
     } else {
       alert('카페명은 영어와 숫자만 사용가능합니다.')
