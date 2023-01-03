@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 
-const HeaderItem = () => {
+const Login = () => {
   let sessionStorage = window.sessionStorage
   const [values, setValues] = useState({
     id: "",
@@ -48,9 +48,11 @@ const HeaderItem = () => {
     setLogin(false)
     // alert('로그아웃')
   }
+
   const test = () => {
     console.log(sessionStorage)
   }
+  
   return (
     <>
       {
@@ -61,12 +63,14 @@ const HeaderItem = () => {
             name='id'
             value={values.id}
             onChange={handleChange}
+            placeholder='ID'
           />
           <input
             type="password"
             name='password'
             value={values.password}
             onChange={handleChange}
+            placeholder='PW'
           />
           <button type="submit">로그인</button>
         </form>
@@ -82,4 +86,4 @@ const HeaderItem = () => {
     </>
   )
 }
-export default HeaderItem;
+export default Login;

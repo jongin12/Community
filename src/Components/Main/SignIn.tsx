@@ -16,6 +16,7 @@ const SignIn = () => {
     e.preventDefault()
     let idCheck =  /^[a-zA-Z0-9]*$/
     let pwCheck =  /^[a-zA-Z0-9]*$/
+    //! 영어와 숫자만 사용 가능
     if(idCheck.test(values.id) && values.id !== ''){
       if(pwCheck.test(values.pw) && values.pw !== ''){
         fetch(`http://127.0.0.1:4625/login/${values.id}`)
