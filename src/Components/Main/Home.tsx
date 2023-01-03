@@ -43,12 +43,12 @@ const Home = () => {
         sessionStorage.login &&
         myCafeList.map((item)=>{
           return (
-            <Link to={`/cafe/${item.cafe_name}`} key={item.cafe_index}>
-              <CafeListBox>
+            <CafeListBox>
+              <Link to={`/cafe/${item.cafe_name}`} key={item.cafe_index}>
                 <p>카페명 : {item.cafe_name}</p>
                 <p>매니저 : {item.cafe_manager}</p>
-              </CafeListBox>
-            </Link>
+              </Link>
+            </CafeListBox>
           )
         })
       }
@@ -56,12 +56,12 @@ const Home = () => {
       {
         cafeList.map((item)=>{
           return (
-            <Link to={`/cafe/${item.cafe_name}`} key={item.cafe_index}>
-              <CafeListBox>
+            <CafeListBox>
+              <Link to={`/cafe/${item.cafe_name}`} key={item.cafe_index}>
                 <p>카페명 : {item.cafe_name}</p>
                 <p>매니저 : {item.cafe_manager}</p>
-              </CafeListBox>
-            </Link>
+              </Link>
+            </CafeListBox>
           )
         })
       }

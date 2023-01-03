@@ -97,6 +97,7 @@ const server = http.createServer(async (req, res) => {
                   });
                   res.end(json);
                 }
+                // 카페명 중복 에러 처리
               } else {
                 connection.query(
                   `INSERT INTO test.join_cafe(user_index,cafe_index,admin) VALUES ((SELECT user_index FROM login where user_id = '${manager}'),(SELECT cafe_index FROM cafe_list where cafe_name = '${name}'),'true')`,
@@ -112,13 +113,6 @@ const server = http.createServer(async (req, res) => {
               }
             }
           );
-          // `INSERT INTO test.join_cafe(user_index,cafe_index,admin) VALUES (7,1,'true')`
-          // let json = JSON.stringify({
-          //   name: name,
-          //   manager: manager,
-          // });
-          // res.writeHead(200, { "Content-Type": "text/json; charset=utf-8" });
-          // res.end(json);
         });
       }
       break;
