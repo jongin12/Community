@@ -66,6 +66,17 @@ const server = http.createServer(async (req, res) => {
             res.end(json);
           }
         );
+      } else if (url.startsWith("/cafeUser")) {
+        let cafe_index = url.split("/")[2];
+        connection.query(
+          `SELECT user_id FROM login WHERE user_index = Any(SELECT user_index FROM join_cafe WHERE cafe_index = ${cafe_index})`,
+          (error, rows, fields) => {
+            if (error) throw error;
+            let json = JSON.stringify(rows);
+            res.writeHead(200, { "Content-Type": "text/json; charset=utf-8" });
+            res.end(json);
+          }
+        );
       }
       break;
     case "POST":
