@@ -10,6 +10,9 @@ interface info{
     join_time:string,
   }
 }
+interface userList{
+  user_id:string,
+}
 
 const Container = styled.div`
   width: 100%;
@@ -18,13 +21,12 @@ const Container = styled.div`
 
 const CafeManage = (props:info) => {
   const cafeName = useParams().name
-  const [userList,setUserList] = useState([])
+  const [userList,setUserList] = useState(Array<userList>)
 
   useEffect(()=>{
     fetch(`http://localhost:4625/cafeUser/${props.data.cafe_index}`)
     .then((res)=>res.json())
     .then((res)=>{
-      console.log(res);
       setUserList(res)
     })
   },[props])
