@@ -16,7 +16,7 @@ const Container = styled.div`
 const Cafe = () => {
   let sessionStorage = window.sessionStorage
   const cafeName = useParams().name
-  const [member, setmember] = useState(false)
+  const [member, setMember] = useState(false)
   useEffect(()=>{
     fetch(`http://localhost:4625/cafeList/${sessionStorage.id}`)
     .then((res)=>res.json())
@@ -25,7 +25,7 @@ const Cafe = () => {
         return (item.cafe_name === cafeName)
       })
       if(filter.length > 0){
-        setmember(true)
+        setMember(true)
       }
     })
   },[])
@@ -41,6 +41,11 @@ const Cafe = () => {
           user:sessionStorage.id,
           cafe:cafeName,
         }),
+      })
+      .then((res)=>res.json())
+      .then((res)=>{
+        console.log(res);
+        setMember(true)
       })
       alert('가입 완료')
     }
