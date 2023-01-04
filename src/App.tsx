@@ -33,11 +33,9 @@ const App = () => {
             <Route path='/signIn' element={<SignIn/>}></Route>
             <Route path='/findPw' element={<FindPw/>}></Route>
             <Route path='/makeCafe' element={<MakeCafe/>}></Route>
-            <Route path='/cafe/:name' element={<Cafe/>}></Route>
+            <Route path='/cafe/:name/*' element={<Cafe/>}></Route>
             <Route path='/*' element={<ErrorPage/>}></Route>
           </Routes>
-          {/* <Home></Home> */}
-          {/* <SignIn></SignIn> */}
         </Main>
       </BrowserRouter>
     </>
