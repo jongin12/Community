@@ -21,11 +21,13 @@ const Home = () => {
   const [myCafeList, setMyCafeList] = useState( Array<cafeListInterface> )
 
   useEffect(()=>{
-    fetch(`http://localhost:4625/cafeList/${sessionStorage.id}`)
-    .then((res)=>res.json())
-    .then((res)=>{
-      setMyCafeList(res)
-    })
+    if(sessionStorage.id){
+      fetch(`http://localhost:4625/cafeList/${sessionStorage.id}`)
+      .then((res)=>res.json())
+      .then((res)=>{
+        setMyCafeList(res)
+      })
+    }
     fetch('http://localhost:4625/cafeList')
     .then((res)=>res.json())
     .then((res)=>{
