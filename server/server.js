@@ -32,6 +32,7 @@ const server = http.createServer(async (req, res) => {
         );
       } else if (url.startsWith("/cafeList")) {
         if (url === "/cafeList") {
+          //모든 카페 리스트 제공
           connection.query(`SELECT * from cafe_list`, (error, rows, fields) => {
             if (error) throw error;
             let json = JSON.stringify(rows);
@@ -39,6 +40,7 @@ const server = http.createServer(async (req, res) => {
             res.end(json);
           });
         } else {
+          // 유저가 가입한 카페 리스트 제공
           let id = url.split("/")[2];
           connection.query(
             `SELECT * FROM cafe_list WHERE cafe_index = ANY(SELECT cafe_index FROM join_cafe WHERE user_index = ANY(SELECT user_index FROM login WHERE user_id = '${id}'))`,
@@ -52,6 +54,18 @@ const server = http.createServer(async (req, res) => {
             }
           );
         }
+      } else if (url.startsWith("/thisCafe")) {
+        let user = url.split("/")[2];
+        let cafe = url.split("/")[3];
+        connection.query(
+          `SELECT * from join_cafe where user_index = (SELECT user_index from login where user_id = '${user}') and cafe_index = (SELECT cafe_index from cafe_list where cafe_name = '${cafe}')`,
+          (error, rows, fields) => {
+            if (error) throw error;
+            let json = JSON.stringify(rows);
+            res.writeHead(200, { "Content-Type": "text/json; charset=utf-8" });
+            res.end(json);
+          }
+        );
       }
       break;
     case "POST":
@@ -134,13 +148,6 @@ const server = http.createServer(async (req, res) => {
               res.end(json);
             }
           );
-          // let json = JSON.stringify({
-          //   test: "dd",
-          // });
-          // res.writeHead(200, {
-          //   "Content-Type": "text/json; charset=utf-8",
-          // });
-          // res.end(json);
         });
       }
       break;

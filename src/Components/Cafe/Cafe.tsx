@@ -17,18 +17,18 @@ const Cafe = () => {
   let sessionStorage = window.sessionStorage
   const cafeName = useParams().name
   const [member, setMember] = useState(false)
+  const [info, setInfo] = useState([])
+
   useEffect(()=>{
-    fetch(`http://localhost:4625/cafeList/${sessionStorage.id}`)
+    fetch(`http://localhost:4625/thisCafe/${sessionStorage.id}/${cafeName}`)
     .then((res)=>res.json())
     .then((res)=>{
-      let filter = res.filter((item:cafeListInterface)=>{
-        return (item.cafe_name === cafeName)
-      })
-      if(filter.length > 0){
+      if(res.length > 0){
         setMember(true)
+        setInfo(res)
       }
     })
-  },[])
+  },[member])
 
   const join = () => {
     if(!sessionStorage.id){
