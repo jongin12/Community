@@ -15,7 +15,7 @@ const makeCafe = () => {
 
   const handleSubmit = (e:any) => {
     e.preventDefault()
-    let nameCheck =  /^[a-zA-Z0-9]*$/
+    let nameCheck =  /^[a-zA-Z0-9가-힣]*$/
     //! 영어와 숫자만 사용 가능
     if(nameCheck.test(name) && name !== ''){
       fetch("http://localhost:4625/makeCafe",{
@@ -33,10 +33,11 @@ const makeCafe = () => {
           alert(res.error)
         }else{
           alert('카페 생성 완료')
+          location.href = '/home'
         }
       })
     } else {
-      alert('카페명은 영어와 숫자만 사용가능합니다.')
+      alert('카페명은 한글,영어,숫자만 사용가능합니다.(자음,모음 불가능)')
     }
   }
 
