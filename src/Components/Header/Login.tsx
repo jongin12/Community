@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Button,InputGroup,Form } from 'react-bootstrap'
 
 const Login = () => {
   let sessionStorage = window.sessionStorage
@@ -61,7 +62,7 @@ const Login = () => {
       {
         !login &&
         <>
-        <form onSubmit={handleSubmit} autoComplete="off">
+        {/* <form onSubmit={handleSubmit} autoComplete="off">
           <input
             type="text"
             name='id'
@@ -76,10 +77,27 @@ const Login = () => {
             onChange={handleChange}
             placeholder='PW'
             />
-          <button type="submit">로그인</button>
-        </form>
-        <Link to={'/signIn'}>회원가입</Link>
-        <Link to={'/findPw'}>ID,PW 찾기</Link>
+          <Button type="submit" variant="dark">로그인</Button>
+        </form> */}
+        <Form className="mb-3" onSubmit={handleSubmit} autoComplete="off" style={{display:'flex'}}>
+          <div>
+            <Form.Control type="text"
+              name='id'
+              value={values.id}
+              onChange={handleChange}
+              placeholder='ID'
+            />
+            <Form.Control type="password"
+              name='password'
+              value={values.password}
+              onChange={handleChange}
+              placeholder='PW'
+            />
+          </div>
+          <Button type="submit" variant="dark">LOGIN</Button>
+        </Form>
+        <Link to={'/signIn'}><Button type="submit" variant="dark">회원가입</Button></Link>
+        <Link to={'/findPw'}><Button type="submit" variant="dark">ID,PW 찾기</Button></Link>
         </>
       }
       {

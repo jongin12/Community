@@ -8,7 +8,7 @@ const Container = styled.div`
   height: 100%;
   display: flex;
   justify-content: space-between;
-  & > div:nth-child(1) {
+  & > div {
     width: 80px;
     display: flex;
     justify-content: center;
@@ -22,7 +22,9 @@ const HeaderItems = () => {
       <div>
         <Link to={'/home'}>Main</Link>
       </div>
-      <Login></Login>
+      <div>
+        <Link to={'/login'}>Login</Link>
+      </div>
     </Container>
   )
 }
