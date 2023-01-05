@@ -16,7 +16,6 @@ const CafeListBox = styled.div`
 
 const Home = () => {
   let sessionStorage = window.sessionStorage
-  console.log(sessionStorage)
 
   const [cafeList, setCafeList] = useState( Array<cafeListInterface> )
   const [myCafeList, setMyCafeList] = useState( Array<cafeListInterface> )

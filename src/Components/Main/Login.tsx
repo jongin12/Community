@@ -20,11 +20,11 @@ const Login = () => {
     fetch(`http://127.0.0.1:4625/login/${values.id}`)
     .then((res)=>res.json())
     .then((res)=>{
-      console.log(res)
       if(res.length === 1){
         if(res[0].user_pw === values.password){
           // alert(JSON.stringify(values, null, 2))
           sessionStorage.setItem('id',values.id)
+          sessionStorage.setItem('idIndex',res[0].user_index)
           //로그인 성공, 세션에 정보 추가, login 값 true로 변경
           location.href = '/home'
           // home으로 이동

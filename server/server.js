@@ -160,6 +160,67 @@ const server = http.createServer(async (req, res) => {
             }
           );
         });
+      } else if (url === "/outCafe") {
+        let body = "";
+        req.on("data", (data) => {
+          body += data;
+        });
+        req.on("end", () => {
+          let abc = body.split('"');
+          let user = abc[3];
+          let cafe = abc[7];
+          connection.query(
+            `DELETE FROM test.join_cafe WHERE user_index = ${user} AND cafe_index = ${cafe} AND admin = 'false'`,
+            (error, rows, fields) => {
+              if (error) throw error;
+              let json = JSON.stringify(rows);
+              res.writeHead(200, {
+                "Content-Type": "text/json; charset=utf-8",
+              });
+              res.end(json);
+            }
+          );
+        });
+      } else if (url === "/changePw") {
+        let body = "";
+        req.on("data", (data) => {
+          body += data;
+        });
+        req.on("end", () => {
+          let abc = body.split('"');
+          let user = abc[3];
+          let nowPw = abc[7];
+          let newPw = abc[11];
+          let json;
+          connection.query(
+            `select user_pw from login where user_index = ${user}`,
+            (error, rows, fields) => {
+              if (error) throw error;
+              console.log(rows[0].user_pw);
+              if (rows[0].user_pw === nowPw) {
+                connection.query(
+                  `UPDATE login SET user_pw = ${newPw} WHERE user_index = ${user}`,
+                  (error, rows, fields) => {
+                    if (error) throw error;
+                    json = JSON.stringify(rows);
+                    res.writeHead(200, {
+                      "Content-Type": "text/json; charset=utf-8",
+                    });
+                    res.end(json);
+                  }
+                );
+              } else {
+                json = JSON.stringify({
+                  error: "현재 비밀번호 틀림",
+                });
+                res.writeHead(200, {
+                  "Content-Type": "text/json; charset=utf-8",
+                });
+                res.end(json);
+              }
+            }
+          );
+        });
       }
       break;
     default:

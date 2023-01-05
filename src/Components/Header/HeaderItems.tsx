@@ -22,6 +22,7 @@ const HeaderItems = () => {
 
   const logout = () => {
     sessionStorage.removeItem('id')
+    sessionStorage.removeItem('idIndex')
     location.href = '/home'
     // alert('로그아웃')
   }
