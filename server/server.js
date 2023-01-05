@@ -57,8 +57,10 @@ const server = http.createServer(async (req, res) => {
       } else if (url.startsWith("/thisCafe")) {
         let user = url.split("/")[2];
         let cafe = url.split("/")[3];
+        console.log(cafe);
+        let decodeCafe = decodeURI(decodeURIComponent(cafe));
         connection.query(
-          `SELECT * from join_cafe where user_index = (SELECT user_index from login where user_id = '${user}') and cafe_index = (SELECT cafe_index from cafe_list where cafe_name = '${cafe}')`,
+          `SELECT * from join_cafe where user_index = (SELECT user_index from login where user_id = '${user}') and cafe_index = (SELECT cafe_index from cafe_list where cafe_name = '${decodeCafe}')`,
           (error, rows, fields) => {
             if (error) throw error;
             let json = JSON.stringify(rows);
