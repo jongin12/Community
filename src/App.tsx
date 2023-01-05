@@ -16,7 +16,10 @@ const Header = styled.div`
 `
 const Main = styled.div`
   width: 100vw;
-  height: 100%;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 const App = () => {

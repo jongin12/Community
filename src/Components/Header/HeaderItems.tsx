@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import Login from './Login'
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 const Container = styled.div`
   width: 100%;
@@ -9,7 +10,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   & > div {
-    width: 80px;
+    width: 180px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,14 +18,40 @@ const Container = styled.div`
 `
 
 const HeaderItems = () => {
+  let sessionStorage = window.sessionStorage
+  console.log(sessionStorage);
+
+  const logout = () => {
+    sessionStorage.removeItem('id')
+    sessionStorage.removeItem('login')
+    location.href = '/home'
+    // alert('로그아웃')
+  }
+
   return (
     <Container>
       <div>
-        <Link to={'/home'}>Main</Link>
+        <Link to={'/home'}>
+          <Button variant="dark">Home</Button>
+        </Link>
       </div>
-      <div>
-        <Link to={'/login'}>Login</Link>
-      </div>
+      {
+        sessionStorage.login &&
+        <div>
+          <Button variant="dark" onClick={logout}>Logout</Button>
+          <Link to={'/mypage'}>
+            <Button variant="dark">Mypage</Button>
+          </Link>
+        </div>
+      }
+      {
+        !sessionStorage.login &&
+        <div>
+          <Link to={'/login'}>
+            <Button variant="dark">Login</Button>
+          </Link>
+        </div>
+      }
     </Container>
   )
 }

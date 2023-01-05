@@ -32,6 +32,7 @@ const SignIn = () => {
               }),
             })
             alert('회원가입 성공!')
+            location.href = '/login'
           } else {
             alert('이미 존재하는 ID입니다.')
           }

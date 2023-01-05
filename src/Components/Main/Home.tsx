@@ -36,7 +36,7 @@ const Home = () => {
   },[])
 
   return (
-    <>
+    <div>
       {
         sessionStorage.login &&
         <h3>내 가입 카페</h3>
@@ -68,7 +68,7 @@ const Home = () => {
         })
       }
       <Link to={'/makeCafe'}>카페 생성</Link>
-    </>
+    </div>
   )
 }
 export default Home
