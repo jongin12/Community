@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 interface cafeListInterface{
   cafe_index:number,
@@ -80,7 +81,9 @@ const Home = () => {
           )
         })
       }
-      <Link to={'/makeCafe'}>카페 생성</Link>
+      <Link to={'/makeCafe'}>
+        <Button variant="dark">Home</Button>
+      </Link>
     </div>
   )
 }

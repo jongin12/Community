@@ -34,6 +34,26 @@ const CafeManage = (props:info) => {
     })
   },[props])
 
+  const out = (user_index:number) => {
+    fetch('http://localhost:4625/outCafe',{
+      method: "POST",
+      mode: 'cors',
+      body: JSON.stringify({
+        user: String(user_index),
+        cafe: String(props.data.cafe_index),
+      }),
+    })
+    .then((res)=>res.json())
+    .then((res)=>{
+      if(res.affectedRows){
+        alert('추방 완료')
+        location.reload()
+      } else{
+        alert('관리자는 추방할수없습니다.')
+      }
+    })
+  }
+
   return (
     <Container>
       <Link to={`/cafe/${cafeName}`}>
@@ -50,7 +70,7 @@ const CafeManage = (props:info) => {
                   <div key={item.user_id}>
                     <p>{item.user_id}</p>
                     <p>가입일</p>
-                    <button>추방</button>
+                    <button onClick={()=>{out(item.user_index)}}>추방</button>
                   </div>
                 )
               })
