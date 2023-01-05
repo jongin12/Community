@@ -25,7 +25,6 @@ const Login = () => {
         if(res[0].user_pw === values.password){
           // alert(JSON.stringify(values, null, 2))
           sessionStorage.setItem('id',values.id)
-          sessionStorage.setItem('login','true')
           //로그인 성공, 세션에 정보 추가, login 값 true로 변경
           location.href = '/home'
           // home으로 이동

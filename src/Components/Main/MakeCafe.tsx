@@ -44,7 +44,7 @@ const makeCafe = () => {
     <>
       <h3>카페 만들기</h3>
       {
-        sessionStorage.login &&
+        sessionStorage.id &&
         <form onSubmit={handleSubmit} autoComplete="off">
           <input
             type="text"
@@ -58,7 +58,7 @@ const makeCafe = () => {
         </form>
       }
       {
-        !sessionStorage.login &&
+        !sessionStorage.id &&
         <p>로그인이 필요합니다.</p>
       }
     </>

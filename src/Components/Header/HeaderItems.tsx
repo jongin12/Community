@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
-import Login from './Login'
+import Login from '../Main/Login'
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
@@ -19,11 +19,9 @@ const Container = styled.div`
 
 const HeaderItems = () => {
   let sessionStorage = window.sessionStorage
-  console.log(sessionStorage);
 
   const logout = () => {
     sessionStorage.removeItem('id')
-    sessionStorage.removeItem('login')
     location.href = '/home'
     // alert('로그아웃')
   }
@@ -36,7 +34,7 @@ const HeaderItems = () => {
         </Link>
       </div>
       {
-        sessionStorage.login &&
+        sessionStorage.id &&
         <div>
           <Button variant="dark" onClick={logout}>Logout</Button>
           <Link to={'/mypage'}>
@@ -45,7 +43,7 @@ const HeaderItems = () => {
         </div>
       }
       {
-        !sessionStorage.login &&
+        !sessionStorage.id &&
         <div>
           <Link to={'/login'}>
             <Button variant="dark">Login</Button>

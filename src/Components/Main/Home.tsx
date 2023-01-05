@@ -16,6 +16,7 @@ const CafeListBox = styled.div`
 
 const Home = () => {
   let sessionStorage = window.sessionStorage
+  console.log(sessionStorage)
 
   const [cafeList, setCafeList] = useState( Array<cafeListInterface> )
   const [myCafeList, setMyCafeList] = useState( Array<cafeListInterface> )
@@ -38,11 +39,11 @@ const Home = () => {
   return (
     <div>
       {
-        sessionStorage.login &&
+        sessionStorage.id &&
         <h3>내 가입 카페</h3>
       }
       {
-        sessionStorage.login &&
+        sessionStorage.id &&
         myCafeList.map((item)=>{
           return (
             <CafeListBox key={item.cafe_index}>

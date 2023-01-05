@@ -7,7 +7,8 @@ import ErrorPage from './Components/Main/ErrorPage';
 import FindPw from './Components/Main/FindPw';
 import MakeCafe from './Components/Main/MakeCafe';
 import Cafe from './Components/Cafe/Cafe';
-import Login from './Components/Header/Login';
+import Login from './Components/Main/Login';
+import MyPage from './Components/Main/Mypage';
 
 const Header = styled.div`
   width: 100vw;
@@ -37,6 +38,7 @@ const App = () => {
             <Route path='/login' element={<Login/>}></Route>
             <Route path='/signIn' element={<SignIn/>}></Route>
             <Route path='/findPw' element={<FindPw/>}></Route>
+            <Route path='/mypage' element={<MyPage/>}></Route>
             <Route path='/makeCafe' element={<MakeCafe/>}></Route>
             <Route path='/cafe/:name/*' element={<Cafe/>}></Route>
             <Route path='/*' element={<ErrorPage/>}></Route>
