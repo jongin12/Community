@@ -21,17 +21,25 @@ const Home = () => {
   const [myCafeList, setMyCafeList] = useState( Array<cafeListInterface> )
 
   useEffect(()=>{
-    if(sessionStorage.id){
-      fetch(`http://localhost:4625/cafeList/${sessionStorage.id}`)
-      .then((res)=>res.json())
-      .then((res)=>{
-        setMyCafeList(res)
-      })
-    }
     fetch('http://localhost:4625/cafeList')
-    .then((res)=>res.json())
-    .then((res)=>{
-      setCafeList(res)
+    .then((cafeList)=>cafeList.json())
+    .then((cafeList)=>{
+      if(sessionStorage.id) {
+        fetch(`http://localhost:4625/cafeList/${sessionStorage.id}`)
+        .then((myCafeList)=>myCafeList.json())
+        .then((myCafeList)=>{
+          let cafeIndex = myCafeList.map((item:any)=>{
+            return item.cafe_index
+          })
+          let filterCafe = cafeList.filter((item:any)=>{
+            return (cafeIndex.indexOf(item.cafe_index) < 0)
+          }) // 내 가입 카페에 있는 카페는 제외.
+          setMyCafeList(myCafeList)
+          setCafeList(filterCafe)
+        })
+      } else {
+        setCafeList(cafeList)
+      }
     })
   },[])
 
@@ -42,7 +50,7 @@ const Home = () => {
         <h3>내 가입 카페</h3>
       }
       {
-        sessionStorage.id &&
+        myCafeList.length > 0 &&
         myCafeList.map((item)=>{
           return (
             <CafeListBox key={item.cafe_index}>
@@ -53,6 +61,11 @@ const Home = () => {
             </CafeListBox>
           )
         })
+      }
+      {
+        !myCafeList.length &&
+        sessionStorage.id && 
+        <div>가입한 카페가 없습니다.</div>
       }
       <h3>추천 카페</h3>
       {
