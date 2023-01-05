@@ -69,7 +69,7 @@ const server = http.createServer(async (req, res) => {
       } else if (url.startsWith("/cafeUser")) {
         let cafe_index = url.split("/")[2];
         connection.query(
-          `SELECT user_id FROM login WHERE user_index = Any(SELECT user_index FROM join_cafe WHERE cafe_index = ${cafe_index})`,
+          `SELECT user_id,user_index FROM login WHERE user_index = Any(SELECT user_index FROM join_cafe WHERE cafe_index = ${cafe_index})`,
           (error, rows, fields) => {
             if (error) throw error;
             let json = JSON.stringify(rows);

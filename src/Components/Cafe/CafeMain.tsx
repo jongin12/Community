@@ -28,9 +28,9 @@ const CafeMain = (props:any) => {
       .then((res)=>res.json())
       .then((res)=>{
         console.log(res);
-        // setMember(true)
       })
       alert('가입 완료')
+      location.reload()
     }
   }
 

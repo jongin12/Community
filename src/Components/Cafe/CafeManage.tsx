@@ -20,6 +20,7 @@ const Container = styled.div`
 `
 
 const CafeManage = (props:info) => {
+  let sessionStorage = window.sessionStorage;
   const cafeName = useParams().name
   const [userList,setUserList] = useState(Array<userList>)
 
@@ -27,7 +28,9 @@ const CafeManage = (props:info) => {
     fetch(`http://localhost:4625/cafeUser/${props.data.cafe_index}`)
     .then((res)=>res.json())
     .then((res)=>{
-      setUserList(res)
+      setUserList(res.filter((item:any)=>{
+        return (item.user_id !== sessionStorage.id)
+      }))
     })
   },[props])
 
@@ -40,15 +43,19 @@ const CafeManage = (props:info) => {
         props.data.admin &&
         <>
           <div>유저 목록</div>
-          <ul>
+          <div>
             {
               userList.map((item:any)=>{
                 return(
-                  <li key={item.user_id}>{item.user_id}</li>
+                  <div key={item.user_id}>
+                    <p>{item.user_id}</p>
+                    <p>가입일</p>
+                    <button>추방</button>
+                  </div>
                 )
               })
             }
-          </ul>
+          </div>
         </>
       }
       {
